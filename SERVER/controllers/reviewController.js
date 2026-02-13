@@ -46,7 +46,7 @@ export const addReview = async (req, res) => {
     // check verified purchase
     let isVerifiedPurchase = false;
 
-    const hasPurchased = await orderModel.findOne({
+    const hasPurchased = await orderModel.find({
       user: userId,
       "items.book": bookId,
       status: "delivered",
@@ -160,6 +160,7 @@ export const getReviewsByBook = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
+      error: error.message,
       message: "Something went wrong.",
     });
   }
